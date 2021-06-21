@@ -133,10 +133,6 @@
             padding-right: 7px;
             margin-top: -3px;
         }
-
-
-
-
     </style>
 </head>
 <body>
@@ -145,17 +141,24 @@
 			<div class="left">
 				
 				<div class="contact">
-					<form name="myform" action="/profile.html"  mmethod="GET">
+					<form name="myform" action=""  method="POST">
+                    <!-- <div name="hello"> -->
 						<h3>SIGN IN</h3>
-						<input type="text" placeholder="USERNAME" id="username" name="uname">
-						<input type="text" placeholder="PASSWORD" id="password" name="pwd">
-						<button class="submit" onclick="validate()">LET'S GO</button>
-                        <br>
-                        <hr>
-                        <br>
+						<input type="text" placeholder="USERNAME" id="username" name="uname" value="{{ request.form.uname }}">
+						<input type="text" placeholder="PASSWORD" id="password" name="pwd" value="{{ request.form.pwd }}">
+						<!-- <input type="submit" class="submit" value="LET's GO"> -->
+                        <button class="submit">LET'S GO</button>
+                        
                         <center><div class="top_link"><a href="signup.html"><span>Don't have an account?</span><b>&nbsp;&nbsp;SIGN UP</b></a></div></center>
 					</form>
+                    <!-- </div> -->
+                    {% if error %}
+                        <!-- <span style="color: green;display: block;"><strong>error:</strong>{{ error}}</span> -->
+                        {{error}}
+                        {% endif %}
 				</div>
+                
+                    
 			</div>
 			<div class="right">
 				<div class="right-text">
@@ -165,22 +168,26 @@
 			</div>
 		</div>
 	</section>
-    <script type="text/javascript">
+    function alert(){
+
+    }
+    <!-- <script type="text/javascript">
         function validate(){
-            var username = document.forms["myform"]["uname"].value;
+            var username = document.getElementById("username").value;
             console.log(username);
-            var password = document.forms["myform"]["pwd"].value;
-            console.log(password);
+            // var user = document.getElementsByTagName["hello"]["uname"];
+            var password = document.getElementById("password").value;
+            console.log(password)
+            // var pwd = document.getElementsByTagName["hello"]
             if (username=="admin" && password=="user"){
-                // alert("Accepted");
-            //    window.location.href = url("C:\\Users\\Siddharth\\Desktop\\GMS\\profile.html");
-                return true;
+               window.location.href = "profile.html";
             }
             else{
-                // alert("Invalid Credentials")
-                return false;
+                alert("Invalid Credentials");
+                // return false;
             }
+            // window.location.href = "profile.html";
         }
-    </script>
+    </script> -->
 </body>
 </html>
