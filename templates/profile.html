@@ -133,7 +133,7 @@
                 <div class="col-md-6">
                     <div class="profile-head">
                                 <h5>
-                                    USER USER
+                                    {{uname.upper()}}
                                 </h5>
                                 <h6>
                                     CUSTOMER
@@ -175,7 +175,7 @@
                                             <label>USERNAME</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Kshiti123</p>
+                                            <p>Yash</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -183,15 +183,7 @@
                                             <label>NAME</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Kshiti Ghelani</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>PROFESSION</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Web Developer and Designer</p>
+                                            <p>Yash Gupta</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -199,7 +191,7 @@
                                             <label>EMAIL</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>kshitighelani@gmail.com</p>
+                                            <p>yashsunil.gupta@gmail.com</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -215,7 +207,7 @@
                                             <label>ADDRESS</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>A-403 Sr. Boys Hostel, PSIT COE, kanpur</p>
+                                            <p>Sr. Boys Hostel, PSIT COE, kanpur</p>
                                         </div>
                                     </div>
                                     
@@ -271,12 +263,20 @@
                     </div>
                 </div>
                 <div class="extra_btn">
-                        <button type="button" class="profile-btn"name="btnAddMore" value="Add Bin" onclick="window.location.href='{{ url_for( 'add_bin') }}';">Add Bin</button>
-                        <button type="button" class="profile-btn"name="btnAddMore" value="Add Bin" onclick="window.location.href='{{ url_for( 'tot_bins') }}';">Total Bins</button>
-                        <button type="button" class="profile-btn"name="btnAddMore" value="Add Bin" onclick="window.location.href='{{ url_for( 'bin_track') }}';">Current Bin Track</button>
+                        <a href="{{url_for('add_bin')}}" style="font-size:30px;color:green; margin:20px;">ADD-BIN</a>
+                        <a href="{{url_for('add_bin')}}" style="font-size:30px;color:green;margin:20px;">TOTAL-BBIN</a>
+                        <a href="{{url_for('add_bin')}}" style="font-size:30px;color:green;margin:20px;">TRACK-BIN</a>
+                        <!-- <button type="button" class="profile-btn"name="btnAddMore" value="Add Bin" onclick="{{ url_for('add_bin') }}">Add Bin</button>
+                        <button type="button" class="profile-btn"name="btnAddMore" value="Add Bin" onclick="window.location.href='#';">Total Bins</button>
+                        <button type="button" class="profile-btn"name="btnAddMore" value="Add Bin" onclick="window.location.href='#';">Current Bin Track</button>
+                        <div id = "btn_click">
+
+                        </div> -->
                 </div>
             </div>
-        </form>           
+        </form>    
+        
     </div>
+
 </body>
 </html>

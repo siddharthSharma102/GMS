@@ -1,9 +1,16 @@
 from flask import Flask, request, redirect, url_for, render_template, flash, session
 from flask_pymongo import PyMongo
 import pymongo
+import os
+import twilio
+from twilio.rest import Client
+
 
 app = Flask(__name__)
-mongo_connect_url = "mongodb+srv://gms_user:gms121@gms.mn0q8.mongodb.net/test"
+acc_sid = "AC6b0ad0de3680fb40ef91442c71e5e10e"
+auth_token = "6b0fd4a1479a00d00cdc7586f78caf63"
+client = Client(acc_sid, auth_token)
+mongo_connect_url = "mongodb+srv://gms_user:12345@gms.mn0q8.mongodb.net/test"
 cluster = pymongo.MongoClient(mongo_connect_url)
 app.config["MONGO_URI"] = mongo_connect_url
 mongo = PyMongo(app)
@@ -12,6 +19,9 @@ mongo = PyMongo(app)
 def about():
     return render_template("about.html")
 
+@app.route("/signup")
+def signup():
+    return render_template('signup.html')
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -23,8 +33,9 @@ def login():
     error = None
     if request.method == "POST":
         uname = request.form["uname"]
+        print(uname)
         pwd = request.form["pwd"]
-        
+        print(pwd)
         db = cluster["gms"]
         collection = db["login"]
 
@@ -33,7 +44,7 @@ def login():
         print(login_user)
         if login_user:
             if login_user['password'] == pwd:
-                return redirect(url_for('profile'))
+                return redirect(url_for('.profile', uname=uname, pwd=pwd))
             else:
                  error = "Invalid Credentials"
         else:
@@ -53,7 +64,10 @@ def contact():
 
 @app.route("/gms/user/profile")
 def profile():
-    return render_template("profile.html")
+    uname = request.args['uname']
+    pwd = request.args['pwd']
+    print(uname, pwd)
+    return render_template("profile.html", uname=uname)
 
 @app.route("/gms/add_bin/")
 def add_bin():
@@ -67,7 +81,22 @@ def edit_profile():
 def tot_bins():
     return render_template("total_bins.html")
 
-@app.route("/gms/track/bin")
-def bin_track():
-    return render_template("bin_track_map.html")
+@app.route("/gms/total_bins_1", methods=["POST"])
+def send():
+    global client
+    block = request.form["block"]
+    street = request.form["street"]
+    district = request.form["district"]
+    state = request.form["state"]
+    pin = request.form["pin"]
+    arr = [block, street, district, state, pin]
+    print(arr)
+    message = ",".join(arr)
+    
+    
+    return render_template("total_bins.html",message=message )
+
+
+
+
 app.run(debug=True)
